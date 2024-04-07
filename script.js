@@ -1,5 +1,5 @@
 // Set the date we're counting down to
-var countDownDate = new Date("April 12, 2024 11:23:25").getTime();
+var countDownDate = new Date("April 22, 2024 11:23:25").getTime();
 const canvas1 = document.getElementById('canvas1');
 const ctx1 = canvas1.getContext('2d');
 const canvas2 = document.getElementById('canvas2');
