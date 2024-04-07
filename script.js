@@ -1,5 +1,7 @@
-// Set the date we're counting down to
-var countDownDate = new Date("April 22, 2024 11:23:25").getTime();
+// Datum do kog se odbrojava
+var countDownDate = new Date("April 22, 2024 13:47:11").getTime();
+
+// 4 canvasa za brojače
 const canvas1 = document.getElementById('canvas1');
 const ctx1 = canvas1.getContext('2d');
 const canvas2 = document.getElementById('canvas2');
@@ -9,40 +11,54 @@ const ctx3 = canvas3.getContext('2d');
 const canvas4 = document.getElementById('canvas4');
 const ctx4 = canvas4.getContext('2d');
 
+// Frejm animacije je 300x200px
 const CANVAS_WIDTH = canvas1.width = canvas2.width = canvas3.width = canvas4.width = 300;
 const CANVAS_HEIGHT = canvas1.height = canvas2.height = canvas3.height = canvas4.height = 200;
 const spriteWidth = 300;
 const spriteHeight = 200;
+
 const numImage = new Image();
-numImage.src = 'SpriteV3.png';
+numImage.src = 'resources/SpriteV4.png';
+
+// Animacije imaju 12 frejmova
+const numOfSprites = 12;
+
+// def vrednosti pomoćnih
 let numFrameS = 0;
 let numFrameM = 0;
 let numFrameH = 0;
 let numFrameD = 0;
-const numOfSprites = 12;
 let curS = 0;
 let curM = 0;
 let curH = 0;
 let curD = 0;
 
-// Update the count down every 1 second
+// Countdown update
 var x = setInterval(function() {
 
-  // Get today's date and time
+  // Trenutno vreme
   var now = new Date().getTime();
 
-  // Find the distance between now and the count down date
+  // Razlika između trenutnog i vremena do kojeg odbrojavamo
   var distance = countDownDate - now;
 
-  // Time calculations for days, hours, minutes and seconds
+    
+  // Računanje vremena
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
+  
+ 
+  // Ispis vremena za testiranje
   document.getElementById("demo").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
+
+  if (distance < 0) {
+    numFrameS = numFrameM = numFrameH = numFrameD = 11;
+    seconds = minutes = hours = days = 0;
+    curS = curM = curH = curD = 0;
+  }
 
   // Sprite animation
   if (curS != seconds){
@@ -97,12 +113,16 @@ var x = setInterval(function() {
     numFrameH = numOfSprites-1;
   }
 
-  // If the count down is finished, write some text
+  /*
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
+  */
+
+  
 }, 40);
+// 40 = 25fps
 
 function animateSeconds(num){
 
